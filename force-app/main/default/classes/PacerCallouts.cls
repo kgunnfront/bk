@@ -43,6 +43,7 @@ public class PacerCallouts {
         HTTPResponse res = http.send(req);
         //system.debug(res.getBody());
          
+        String token=null;
         if(res.getStatusCode()!=200)
         {
             //bail if there's an error
@@ -52,12 +53,12 @@ public class PacerCallouts {
         }else{
             //extract the token from the response
             Map<String, Object> m = (Map<String, Object>)JSON.deserializeUntyped(res.getBody());
-            String token = (String)m.get('nextGenCSO');
-            return token;
+            token = (String)m.get('nextGenCSO');
         }
+        return token;
     }
 
-    public static String logoutCall() {
+    public static void logoutCall() {
             //use the external named credetial setup in Salesforce as the endpoint
             HttpRequest req = new HttpRequest();
             req.setEndpoint('callout:PACER_QA/services/cso-logout');
