@@ -10,12 +10,12 @@ public class PacerCallouts {
         req.setHeader('Accept','application/json');
         req.setHeader('X-NEXT-GEN-CSO',token);
         //now use the merge fields from the named credential to send the username and pwd
-        req2.setBody(' { "caseNumberFull" : "'+caseNum+'" }'); 
+        req.setBody(' { "caseNumberFull" : "'+caseNum+'" }'); 
         //System.debug(req);
 
         // send it & get the response
         Http http = new Http();
-        HTTPResponse res = http2.send(req);
+        HTTPResponse res = http.send(req);
         system.debug(res.getStatus());
         system.debug(res.getBody());
         Object obj = JSON.deserializeUntyped(res.getBody());
